@@ -8,11 +8,13 @@
 color_prompt=yes
 alias ls='ls --color=auto'
 alias s='source venv/bin/activate'
+alias addenv='export $(grep -v "^#" .env | xargs)'
 alias zzz='poweroff'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 alias vim="nvim"
 alias sudo="sudo "
+alias ff="fastfetch"
 
 # colors
 declare blk="\[\033[01;30m\]"
@@ -51,5 +53,25 @@ gra(){
   local new_url="git@${custom_host}:${repo_url#git@github.com:}"
   git remote add origin "$new_url"
 }
+awkawk(){
+awk -v l="$1" '(NR==1){header=$0;next}
+                (NR%l==2) {
+                   close(file); 
+                   file=sprintf("%s.%0.5d.csv",FILENAME,++c)
+                   sub(/csv[.]/,"",file)
+                   print header > file
+                }
+                {print > file}' "$2"
+}
+
 bind -x '"\C-f": "~/.local/bin/tmux-fzf-start"'
 #bind -x '"\C-f": "tmux new ~/.local/bin/tmux-fzf-start"'
+
+export PATH="$PATH:$HOME/go/bin"
+# export GOPATH="$HOME/go"
+# export PATH="$GOPATH/bin:$PATH"
+# export PATH=$PATH:$(go env GOPATH)/bin
+source /usr/share/nvm/init-nvm.sh
+alias pbcopy='xclip -selection clipboard'
+alias mywifi="tr -d '\n' < ~/.wifi_pass | xclip -selection clipboard"
+alias faws="aws --profile floci"
