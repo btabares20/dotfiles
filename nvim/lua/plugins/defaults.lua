@@ -7,4 +7,8 @@ return {
     {'hrsh7th/nvim-cmp'},
     {'nvim-tree/nvim-web-devicons'},
     {'HakonHarnes/img-clip.nvim'},
+    {'folke/which-key.nvim',
+    config = function()
+        require("which-key").setup()
+    end}
 }

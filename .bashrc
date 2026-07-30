@@ -75,3 +75,5 @@ source /usr/share/nvm/init-nvm.sh
 alias pbcopy='xclip -selection clipboard'
 alias mywifi="tr -d '\n' < ~/.wifi_pass | xclip -selection clipboard"
 alias faws="aws --profile floci"
+alias faws="aws --profile floci"
+alias lzd="lazydocker"
