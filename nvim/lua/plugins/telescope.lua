@@ -1,4 +1,5 @@
 return {
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {
         'nvim-telescope/telescope.nvim', 
         dependencies=  {
@@ -19,6 +20,7 @@ return {
             vim.keymap.set("n", "<leader>gW", telescope.create_git_worktree, {
                 desc = "Git Create Worktree",
             })
+            require('telescope').load_extension('fzf')
         end,
     },
 }
