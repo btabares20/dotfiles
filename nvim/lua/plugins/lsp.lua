@@ -30,6 +30,27 @@
                   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
                   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
               end)
+              vim.lsp.config("basedpyright", {
+                  settings = {
+                      basedpyright = {
+                          analysis = {
+                              typeCheckingMode = "standard",
+
+                              reportReturnType = "warning",
+
+                              reportUnknownVariableType = "none",
+                              reportUnknownParameterType = "none",
+                              reportUnknownArgumentType = "none",
+                              reportUnknownMemberType = "none",
+                              reportMissingParameterType = "none",
+                              reportMissingTypeArgument = "none",
+
+                              reportUnusedImport = "none",
+                              reportUnusedVariable = "none",
+                          },
+                      },
+                  },
+              })
 
               require('mason').setup({})
               require('mason-lspconfig').setup({
