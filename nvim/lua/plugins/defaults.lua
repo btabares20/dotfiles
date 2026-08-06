@@ -45,5 +45,9 @@ return {
               'WinScrolled', 'CursorMoved'
           },
       },
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {}
     }
 }
