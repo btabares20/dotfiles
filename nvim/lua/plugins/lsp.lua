@@ -34,24 +34,23 @@
                   settings = {
                       basedpyright = {
                           analysis = {
-                              typeCheckingMode = "standard",
-
-                              reportReturnType = "warning",
-
-                              reportUnknownVariableType = "none",
-                              reportUnknownParameterType = "none",
-                              reportUnknownArgumentType = "none",
-                              reportUnknownMemberType = "none",
-                              reportMissingParameterType = "none",
-                              reportMissingTypeArgument = "none",
-
-                              reportUnusedImport = "none",
-                              reportUnusedVariable = "none",
+                              typeCheckingMode = "standard", -- or "off", "standard", "strict"
+                              diagnosticMode = "openFilesOnly",
+                              diagnosticSeverityOverrides = {
+                                  reportAny = "none",
+                                  reportUnknownArgumentType = "none",
+                                  reportUnknownMemberType = "none",
+                                  reportUnknownVariableType = "none",
+                                  reportUnknownParameterType = "none",
+                                  reportUnknownLambdaType = "none",
+                                  reportMissingTypeStubs = "none",
+                                  reportUnusedCallResult = "none",
+                                  reportUnusedExpression = "none",
+                              },
                           },
                       },
                   },
               })
-
               require('mason').setup({})
               require('mason-lspconfig').setup({
                   ensure_installed = {},

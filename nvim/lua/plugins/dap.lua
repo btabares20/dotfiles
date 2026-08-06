@@ -62,14 +62,20 @@ return {
     {
         'mfussenegger/nvim-dap-python',
         config = function()
-            local git_dir = vim.fs.find(".git", {
-                upward = true,
-                type = "directory",
-            })[1]
+            local function get_python()
+                local root = vim.fs.root(0, { ".git", "pyproject.toml", "setup.py" })
+                or vim.uv.cwd()
 
-            local root = git_dir and vim.fs.dirname(git_dir) or vim.loop.cwd()
+                local python = root .. "/venv/bin/python"
 
-            require("dap-python").setup(root .. "/venv/bin/python")
+                if vim.fn.executable(python) == 1 then
+                    return python
+                end
+
+                return vim.fn.exepath("python3")
+            end
+
+            require("dap-python").setup(get_python())
             local dap = require("dap")
             table.insert(dap.configurations.python, {
                 name = "module",
