@@ -63,6 +63,43 @@ awk -v l="$1" '(NR==1){header=$0;next}
                 }
                 {print > file}' "$2"
 }
+def() {
+    local word="$1"
+    local lang="${2:-en}"
+    local query
+    local def
+
+    [[ -z "$word" ]] && {
+        echo "Usage: define <word> [language]"
+        return 1
+    }
+
+    query=$(curl -fsS "https://freedictionaryapi.com/api/v1/entries/${lang}/${word}") || {
+        echo "Failed to contact dictionary API."
+        return 1
+    }
+
+    if ! jq -e . >/dev/null 2>&1 <<<"$query"; then
+        echo "Invalid response from dictionary API."
+        return 1
+    fi
+
+    def=$(
+        jq -r '
+            .entries[]? |
+            (.partOfSpeech // "unknown") as $pos |
+            .senses[]? |
+            "\($pos): \(.definition // "No definition available.")"
+        ' <<<"$query"
+    )
+
+    if [[ -z $def ]]; then
+        echo "No definitions found for \"$word\"."
+        return 1
+    fi
+
+    printf '%s\n' "$def"
+}
 
 bind -x '"\C-f": "~/.local/bin/tmux-fzf-start"'
 #bind -x '"\C-f": "tmux new ~/.local/bin/tmux-fzf-start"'
