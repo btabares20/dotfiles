@@ -1,21 +1,33 @@
+local themes = {
+  tokyo = "tokyonight-moon",
+  kana = "kanagawa",
+  rose = "rose-pine-moon",
+}
+local theme = themes.rose
+-- local theme = "kanagawa"
+-- local theme = "tokyonight-moon"
+
 return {
--- the colorscheme should be available when starting Neovim
---  {
---    "folke/tokyonight.nvim",
---    lazy = false, -- make sure we load this during startup if it is your main colorscheme
---    priority = 1000, -- make sure to load this before all the other start plugins
---    config = function()
---      -- load the colorscheme here
---      vim.cmd([[colorscheme tokyonight-moon]])
---    end,
---  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
   {
     "rebelot/kanagawa.nvim",
-    opts={
-    },
-    config = function()
-        vim.cmd("colorscheme kanagawa")
-    end
-  }
-}
+    lazy = false,
+    priority = 1000,
+  },
 
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme(theme)
+    end,
+  },
+
+}
