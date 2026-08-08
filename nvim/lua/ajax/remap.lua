@@ -4,6 +4,8 @@ vim.keymap.set('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
 --vim.keymap.set('v', '<leader>s',  ":SSSelected" )
 vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = "Toggle comment" })
 vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = "Toggle comment" })
+vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = "Toggle comment" })
+vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = "Toggle comment" })
 
 -- very nice
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
